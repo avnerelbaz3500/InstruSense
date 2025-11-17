@@ -1,43 +1,10 @@
 # InstruSense
 
-┌───────────────────────────────┐
-│         Frontend Streamlit    │
-│  - Upload de fichiers audio   │
-│  - Affichage des résultats    │
-│  - Pages et composants UI     │
-└──────────────┬────────────────┘
-               │  Requête HTTP (POST /recognize)
-               ▼
-┌───────────────────────────────┐
-│           API FastAPI         │
-│  - Validation des fichiers    │
-│  - Gestion des erreurs        │
-│  - Logging structuré (Structlog) │
-│  - Orchestration du moteur    │
-└──────────────┬────────────────┘
-               │ Appel interne au moteur audio
-               ▼
-┌───────────────────────────────┐
-│     Moteur de traitement      │
-│          maison               │
-│  - Analyse du fichier audio   │
-│  - Détection des instruments │
-│  - Possibilité ML / DSP       │
-└──────────────┬────────────────┘
-               │ Retour des résultats
-               ▼
-┌───────────────────────────────┐
-│     Résultat JSON / Liste     │
-│       d’instruments           │
-└──────────────┬────────────────┘
-               │
-               ▼
-┌───────────────────────────────┐
-│  Streamlit frontend affiche   │
-│  la liste des instruments    │
-└───────────────────────────────┘
+
+### Architecture proposée
 
 
+```
 my_audio_app/
 │
 ├── apps/                             # Applications (frontend/backend)
@@ -97,3 +64,4 @@ my_audio_app/
 ├── pyproject.toml                    # Config uv workspace
 ├── uv.lock                           
 └── .env.example                      
+```
