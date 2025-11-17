@@ -5,7 +5,7 @@
 
 
 ```
-my_audio_app/
+InstruSense/
 │
 ├── apps/                             # Applications (frontend/backend)
 │   ├── frontend/                     # Streamlit
