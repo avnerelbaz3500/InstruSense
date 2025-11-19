@@ -1,11 +1,4 @@
 # InstruSense
-
-
-### Architecture proposée
-Parfait ! Voici une version beaucoup plus détaillée pour le README, qui combine **arborescence et flux entre modules**, façon ASCII diagram. Tu peux la coller directement dans ton README :
-
-```markdown
-# InstruSense
 Architecture détaillée générée automatiquement.
 
 ## Arborescence & flux
