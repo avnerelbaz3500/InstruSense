@@ -1,0 +1,3 @@
+[tool.uv]
+name = "instru-sense"
+version = "0.1.0"
