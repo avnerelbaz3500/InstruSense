@@ -2,66 +2,113 @@
 
 
 ### Architecture proposée
+Parfait ! Voici une version beaucoup plus détaillée pour le README, qui combine **arborescence et flux entre modules**, façon ASCII diagram. Tu peux la coller directement dans ton README :
 
+```markdown
+# InstruSense
+Architecture détaillée générée automatiquement.
 
-```
+## Arborescence & flux
+
 InstruSense/
 │
-├── apps/                             # Applications (frontend/backend)
-│   ├── frontend/                     # Streamlit
-│   │   ├── __init__.py
-│   │   ├── main.py                   
-│   │   ├── components/               
-│   │   └── config.py                 
+├── apps/
+│   ├── api/                 # API principale exposant les endpoints
+│   │   ├── main.py          # FastAPI entrypoint
+│   │   ├── routers/         # Définition des routes
+│   │   ├── dto/             # Schémas Pydantic pour requêtes/réponses
+│   │   ├── dependencies.py  # Injection de dépendances (modèles, config)
+│   │   └── config.py        # Config API (host, port)
 │   │
-│   └── backend/                      # FastAPI
-│       ├── __init__.py
-│       ├── main.py                   
-│       ├── routes/                   
-│       ├── services/                 # Orchestration (appelle domain/)
-│       ├── schemas/                  
-│       └── config.py                 
+│   ├── inference/           # Service d’inférence séparé
+│   │   ├── server.py        # FastAPI entrypoint
+│   │   ├── adapter.py       # Adaptation pour la prédiction (bytes → features)
+│   │   └── config.py        # Config inference (chemin modèle)
+│   │
+│   └── training/            # Scripts d’entrainement
+│       ├── train_model.py
+│       └── dataset_loader.py
 │
-├── domain/                           # Logique métier (PURE, pas de dépendance web)
-│   ├── audio/                        
-│   │   ├── __init__.py
-│   │   ├── processor.py              # Traitement audio pur
-│   │   └── analyzer.py               
-│   └── ml/                           
-│       ├── __init__.py
-│       ├── model_loader.py           # Chargement modèle avec cache
-│       └── predictor.py              
+├── core/                    # Logique métier et ML
+│   ├── audio/
+│   │   ├── processor.py     # Chargement audio
+│   │   └── analyzer.py      # Extraction de features
+│   │
+│   ├── ml/
+│   │   ├── model_loader.py  # Chargement modèle (pickle)
+│   │   ├── predictor.py     # Prédiction sur features
+│   │   └── postprocess.py   # Formatage de réponse
+│   │
+│   ├── interfaces/          # Ports pour architecture hexagonale
+│   │   ├── model_loader_port.py
+│   │   ├── predictor_port.py
+│   │   └── audio_port.py
+│   │
+│   └── exceptions.py        # Exceptions métier
 │
-├── infrastructure/                   # Infrastructure technique
-│   ├── __init__.py
-│   ├── logging_config.py             
-│   ├── settings.py                   # Config globale
-│   └── utils.py                      # Utils GÉNÉRIQUES
+├── services/                # Adaptateurs / orchestrateurs
+│   ├── prediction_service.py # Orchestrateur prédiction
+│   ├── audio_adapter.py      # Chargement et preprocessing audio
+│   └── model_loader_adapter.py # Chargement modèle depuis disk
 │
-├── data/                             # NOUVEAU: Séparation données
-│   ├── models/                       
-│   │   └── v1/
-│   │       └── instrument_model.pkl
-│   ├── samples/                      
-│   └── processed/                    
+├── infra/
+│   ├── logging/config.py     # Setup logging
+│   ├── settings/base.py      # Config globale (env, paths)
+│   └── utils/paths.py        # Helpers chemins
 │
-├── tests/                            
-│   ├── unit/                         
-│   │   ├── test_domain/              
-│   │   └── test_infrastructure/
-│   ├── integration/                  
-│   └── conftest.py                   
+├── models/
+│   └── v1/instrument_model.pkl
 │
-├── docker/                           
-│   ├── frontend.Dockerfile           
-│   ├── backend.Dockerfile            
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── features/
+│
+├── docker/
+│   ├── api.Dockerfile
+│   ├── inference.Dockerfile
+│   ├── training.Dockerfile
 │   └── docker-compose.yml
 │
-├── scripts/                          
-│   ├── start_dev.sh                  
-│   └── train_model.py                
+├── scripts/
+│   └── dev/start_dev.sh
 │
-├── pyproject.toml                    # Config uv workspace
-├── uv.lock                           
-└── .env.example                      
+└── tests/
+    ├── unit/
+    ├── integration/
+    └── e2e/
+
+## Flux principaux
+
 ```
+
+Client
+│
+▼
+[apps/api/main.py]  ---> [routers] ---> [services/prediction_service.py] ---> [core/audio/analyzer.py + core/ml/predictor.py]
+│
+▼
+[core/ml/postprocess.py]
+│
+▼
+Response
+
+apps/inference/server.py ---> services/audio_adapter.py ---> core/audio/processor.py
+services/model_loader_adapter.py ---> core/ml/model_loader.py
+
+apps/training/train_model.py ---> core/ml/model_loader.py + core/audio/analyzer.py ---> data/features
+
+```
+
+### Légende
+- `apps/` : services exposés (API, inference, training)
+- `core/` : logique métier et ML
+- `services/` : adaptateurs entre core et apps
+- `infra/` : config et utils
+- `models/` : modèles ML
+- `data/` : données brutes et features
+- `docker/` : containerisation
+- `scripts/` : scripts pratiques (dev, etc.)
+- `tests/` : tests unitaires, intégration et E2E
+```
+
