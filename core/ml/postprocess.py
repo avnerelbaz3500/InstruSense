@@ -1,2 +1,4 @@
 def to_response(pred):
-    return {"instrument": str(pred), "confidence": 1.0}
+    return {"instrument": pred["instrument"],
+            "confidence": pred["confidence"]
+        }
