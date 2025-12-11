@@ -7,9 +7,10 @@ services:
       dockerfile: docker/api.Dockerfile
     ports:
       - "8000:8000"
-    volumes:
-      - ..:/app
-      - models:/models
+    environment:
+      - INFERENCE_URL=http://inference:8001/infer
+    depends_on:
+      - inference
 
   inference:
     build:
@@ -18,16 +19,15 @@ services:
     ports:
       - "8001:8001"
     volumes:
-      - ..:/app
-      - models:/models
+      - ../models:/models
 
   training:
     build:
       context: ..
       dockerfile: docker/training.Dockerfile
     volumes:
-      - ..:/app
-      - models:/models
+      - ../models:/models
+      - ../data:/data
 
 volumes:
   models:
