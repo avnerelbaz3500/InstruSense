@@ -1,3 +1,4 @@
-# Dépendances FastAPI (loader de modèle, etc.)
-def get_model():
-    raise NotImplementedError
+from services.prediction_service import PredictionService
+
+def get_prediction_service() -> PredictionService:
+    return PredictionService()
