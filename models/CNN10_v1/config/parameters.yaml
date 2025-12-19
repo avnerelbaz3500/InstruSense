@@ -1,0 +1,4 @@
+lr: 5.0e-05
+model_name: test
+n_instr: 19
+threshold: 0.2
