@@ -1,5 +1,6 @@
 import torchaudio
 
+
 def audio_to_input(audio_path, sample_rate=22050, n_mels=128):
     waveform, sr = torchaudio.load(audio_path)
 
