@@ -16,7 +16,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install flake8 black
 
       - name: Lint code
         run: flake8 .

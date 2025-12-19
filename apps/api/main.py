@@ -5,8 +5,7 @@ from .config import API_HOST, API_PORT
 
 # L'application FastAPI
 app = FastAPI(
-    title="InstruSense API",
-    description="API de reconnaissance d'instruments"
+    title="InstruSense API", description="API de reconnaissance d'instruments"
 )
 
 # les routes
@@ -20,4 +19,5 @@ def health():
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host=API_HOST, port=API_PORT)

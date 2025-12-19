@@ -1,8 +1,11 @@
+import os
 import httpx
+
+INFERENCE_URL = os.getenv("INFERENCE_URL", "http://localhost:8001/infer")
 
 
 class PredictionService:
-    def __init__(self, inference_url: str = "http://localhost:8001/infer"):
+    def __init__(self, inference_url: str = INFERENCE_URL):
         self.inference_url = inference_url
 
     async def predict(self, audio_bytes: bytes) -> dict:

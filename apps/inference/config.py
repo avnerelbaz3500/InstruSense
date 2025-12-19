@@ -1,3 +1,3 @@
-MODEL_PATH = "/models/instrument_model.pkl"
+MODEL_PATH = "models/CNN10_v1"
 API_HOST = "0.0.0.0"
 API_PORT = 8001
