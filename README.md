@@ -18,9 +18,17 @@ InstruSense/
 │   │   ├── adapter.py       # Adaptation pour la prédiction (bytes → features)
 │   │   └── config.py        # Config inference (chemin modèle)
 │   │
-│   └── training/            # Scripts d’entrainement
-│       ├── train_model.py
-│       └── dataset_loader.py
+│   ├── training/            # Scripts d'entrainement
+│   │   ├── train_model.py
+│   │   └── dataset_loader.py
+│   │
+│   └── interface/           # Interface utilisateur web (frontend)
+│       ├── static/          # Fichiers statiques (CSS, JS, images)
+│       │   ├── css/
+│       │   ├── js/
+│       │   └── images/
+│       ├── templates/       # Templates HTML
+│       └── config.py        # Config interface (port, host)
 │
 ├── core/                    # Logique métier et ML
 │   ├── audio/
@@ -94,7 +102,7 @@ apps/training/train_model.py ---> core/ml/model_loader.py + core/audio/analyzer.
 ```
 
 ### Légende
-- `apps/` : services exposés (API, inference, training)
+- `apps/` : services exposés (API, inference, training, interface)
 - `core/` : logique métier et ML
 - `services/` : adaptateurs entre core et apps
 - `infra/` : config et utils
@@ -103,5 +111,11 @@ apps/training/train_model.py ---> core/ml/model_loader.py + core/audio/analyzer.
 - `docker/` : containerisation
 - `scripts/` : scripts pratiques (dev, etc.)
 - `tests/` : tests unitaires, intégration et E2E
+
+### Interface Web
+L'interface utilisateur se trouve dans `apps/interface/`. Cette structure permet de :
+- Maintenir la cohérence avec les autres services dans `apps/`
+- Séparer clairement le frontend du backend
+- Faciliter le déploiement indépendant si nécessaire
 ```
 

@@ -1,0 +1,155 @@
+/* In order to start from scratch */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-image: url('/static/images/records.jpg');
+    background-color: #f3e8bf;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Vinyl Form */
+.container {
+    width: 650px;
+    height: 650px;
+    border-radius: 50%; /* this way we can transform the square container into a circle */
+    background: radial-gradient(
+        circle,
+        #f5f1e8 0%,
+        #e8ddd4 5%,
+        #f5f1e8 15%,
+        #e8ddd4 25%,
+        #f5f1e8 35%,
+        #e8ddd4 45%,
+        #f5f1e8 55%,
+        #e8ddd4 65%,
+        #f5f1e8 75%,
+        #e8ddd4 85%,
+        #f5f1e8 95%,
+        #e8ddd4 100%
+    );
+    padding: 60px; /* space between the border and the content */
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Central Hole in the Vinyl Form */
+.container::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #070707;
+    z-index: 1;
+
+}
+
+main {
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 20px;
+    padding: 30px 25px;
+    width: 75%;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+/* Title on the Vinyl Form */
+header h1 {
+    color: #8B0000;
+    font-size: 3.5em;
+    margin-bottom: 10px;
+    z-index: 2;
+    position: relative;
+}
+
+header p {
+    color: #8B0000;
+    font-size: 1.5em;
+    z-index: 2;
+    position: relative;
+}
+
+/* Upload Section */
+.upload-section {
+    margin-bottom: 30px;
+    z-index: 2;
+    position: relative;
+}
+
+.upload-section h2 {
+    color: #8B0000;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+    /* Formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Input */
+input[type="file"] {
+    padding: 15px;
+    border: 2px dashed #8B0000;
+    border-radius: 10px;
+    background: #f8f9ff;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #8B0000;
+    background: #f8f9ff;
+}
+
+button {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #621111 0%, #8B0000 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px #30020266;}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+

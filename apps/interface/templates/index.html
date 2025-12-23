@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstruSense - Reconnaissance d'instruments</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête de la page -->
+        <header>
+            <h1>🎵 InstruSense</h1>
+            <p>Reconnaissance d'instruments de musique</p>
+        </header>
+
+        <!-- Zone principale -->
+        <main>
+            <!-- Formulaire pour uploader un fichier audio -->
+            <div class="upload-section">
+                <h2>Choisissez un fichier audio</h2>
+                <form id="uploadForm">
+                    <input type="file" id="audioFile" accept="audio/*" required>
+                    <button type="submit" id="submitBtn">Analyser</button>
+                </form>
+            </div>
+
+            <!-- Zone d'affichage du résultat -->
+            <div class="result-section" id="resultSection" style="display: none;">
+                <h2>Résultat de l'analyse</h2>
+                <div class="result-card">
+                    <p class="instrument-label">Instrument détecté :</p>
+                    <p class="instrument-name" id="instrumentName">-</p>
+                    <p class="confidence-label">Confiance :</p>
+                    <p class="confidence-value" id="confidenceValue">-</p>
+                </div>
+            </div>
+
+            <!-- Zone d'affichage des erreurs -->
+            <div class="error-section" id="errorSection" style="display: none;">
+                <p class="error-message" id="errorMessage"></p>
+            </div>
+
+            <!-- Zone de chargement -->
+            <div class="loading-section" id="loadingSection" style="display: none;">
+                <p>⏳ Analyse en cours...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Lien vers le fichier JavaScript -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
+
