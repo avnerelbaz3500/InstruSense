@@ -1,0 +1,466 @@
+/* Reset everything to avoid browser default styles messing things up */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main page body -> fill the whole screen  */
+body {
+    font-family: sans-serif;
+    background-image: url('/static/images/records.jpg');
+    background-color: #f3e8bf; /* Fallback color in case image doesn't load */
+    background-position: center;
+    background-attachment: fixed; /* Background stays put when scrolling */
+    background-size: cover; /* Make sure the image covers the whole screen */
+    min-height: 100vh; /* At least full screen height, but can grow if needed */
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
+    margin: 0;
+    overflow: auto; /* Allow scrolling if content is too tall */
+    position: relative;
+}
+
+.instruments-explosion {
+    position: fixed;
+    inset: 0; 
+    pointer-events: none; /* Let clicks pass through to elements below */
+    z-index: 300; /* High enough to be above most things */
+}
+
+/* The main vinyl disc in the center */
+.container {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%; /* Makes it a perfect circle */
+    background: radial-gradient(
+        circle,
+        #f5f1e8 0%, #e8ddd4 5%, #f5f1e8 15%, #e8ddd4 25%,
+        #f5f1e8 35%, #e8ddd4 45%, #f5f1e8 55%, #e8ddd4 65%,
+        #f5f1e8 75%, #e8ddd4 85%, #f5f1e8 95%, #e8ddd4 100%
+    ); /* Alternating colors to mimic vinyl record */
+    padding: 40px; /* Space inside the disc */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: visible; /* Let the instrument discs overflow outside */
+    position: relative;
+    z-index: 5;
+}
+
+/* The center hole of the vinyl */
+.container::before {
+    content: '';
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #070707; /* Dark center hole */
+    z-index: 1;
+}
+
+/* The white content box inside the vinyl disc */
+/* Made it slightly transparent so you can still see the vinyl pattern behind it */
+main {
+    background: rgba(255, 255, 255, 0.88); 
+    border-radius: 15px; 
+    padding: 20px 18px;
+    width: 75%;
+    text-align: center;
+    z-index: 2; /* Above the vinyl background */
+    position: relative;
+}
+
+/* Header section with the title */
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Main title */
+header h1 {
+    color: #8B0000;
+    font-size: 2.5em;
+    margin-bottom: 8px;
+    z-index: 2;
+    position: relative;
+}
+
+/* Subtitle*/
+header p {
+    color: #8B0000;
+    font-size: 1.1em;
+    z-index: 2;
+    position: relative;
+}
+
+/* Section where users upload their audio file */
+.upload-section {
+    margin-bottom: 20px;
+    z-index: 2;
+    position: relative;
+}
+
+.upload-section h2 {
+    color: #8B0000;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+/* The form that contains the file input and submit button */
+form {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; /* Space between the file input and button */
+}
+
+/* File input*/
+input[type="file"] {
+    padding: 10px;
+    border: 2px dashed #8B0000; 
+    border-radius: 8px;
+    background: #f8f9ff; 
+    cursor: pointer; /* Show it's clickable */
+    font-size: 0.9em;
+    transition: all 0.3s ease; /* Smooth transitions */
+}
+
+input[type="file"]:hover {
+    border-color: #8B0000;
+    background: #f8f9ff;
+}
+
+/* Submit button */
+button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #621111 0%, #8B0000 100%); /* Dark red gradient */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Button lifts up slightly when you hover over it */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px #30020266; /* Add shadow for depth */
+}
+
+/* Button goes back down when clicked */
+button:active {
+    transform: translateY(0);
+}
+
+/* Disabled state, when analysis is running */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed; }
+
+/* Error message box :shows when user forgets to select a file */
+.error-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fee; 
+    border: 2px solid #fcc; 
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease; /* Fade in smoothly */
+    z-index: 2;
+    position: relative;
+}
+
+.error-message {
+    color: #c33;
+    font-weight: bold;
+}
+
+/* Loading indicator */
+.loading-section {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+    z-index: 2;
+    position: relative;
+}
+
+.loading-section p {
+    color: #8B0000;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between emoji, text, and dots */
+}
+
+/* The hourglass emoji that rotates */
+.loading-emoji {
+    display: inline-block;
+    animation: rotateHourglass 2s linear infinite;
+    font-size: 1.3em;
+}
+
+/* Container for the three animated dots */
+.loading-dots {
+    display: inline-block;
+}
+
+/* Each dot pulses at a slightly different time for a wave effect */
+.loading-dots .dot {
+    display: inline-block;
+    animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.loading-dots .dot:nth-child(1) { animation-delay: 0s; }
+.loading-dots .dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots .dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* The small instrument discs that appear around the main vinyl */
+/* They start invisible and small, then "explode" outward */
+.instrument-disc {
+    position: absolute; 
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        #f5f1e8 0%, #e8ddd4 20%, #f5f1e8 40%,
+        #e8ddd4 60%, #f5f1e8 80%, #e8ddd4 100%
+    ); /* Same vinyl pattern as the main disc */
+    border: 4px solid #8B0000; 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    opacity: 0; /* Start invisible */
+    transform: scale(0); /* Start at zero size */
+    pointer-events: auto; 
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+    will-change: transform, opacity;}
+
+/* When you hover over a disc, it grows a bit */
+.instrument-disc:hover {
+    transform: scale(1.1); 
+    z-index: 15;
+}
+
+/* The center hole of each small disc  */
+.instrument-disc::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #070707; /* Dark center */
+    z-index: 1;
+}
+
+    /* When the explode class is added -> trigger the explosion animation */
+.instrument-disc.explode {
+    animation: explode 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transform-origin: center center; 
+}
+
+/* The instrument image inside each disc */
+.instrument-disc-icon {
+    width: 120px;
+    height: 120px;
+    object-fit: contain; /* Show the whole image without cropping */
+    border-radius: 50%; /* Make it circular */
+    z-index: 2; 
+    position: relative;
+    margin-bottom: 8px; 
+}
+
+/* The instrument name text below the image */
+.instrument-disc-name {
+    font-size: 0.7em; 
+    color: #8B0000;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    line-height: 1.2;
+    max-width: 140px; /* Prevent text from being too wide */
+    word-wrap: break-word; /* Wrap long names */
+}
+
+/* Modal overlay */
+.instrument-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 10000; /* Very high to be above everything */
+    inset: 0; /* Cover the whole screen */
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+
+.instrument-modal.show {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+/* The actual modal box with the instrument details */
+.modal-content {
+    background: radial-gradient(
+        circle,
+        #f5f1e8 0%, #e8ddd4 20%, #f5f1e8 40%,
+        #e8ddd4 60%, #f5f1e8 80%, #e8ddd4 100%
+    ); /* Same vinyl pattern */
+    border: 6px solid #8B0000;
+    border-radius: 20px; 
+    padding: 40px;
+    max-width: 500px; 
+    width: 90%; /* Responsive on small screens */
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: scaleIn 0.3s ease; /* Pop in animation */
+}
+
+/* The X button to close the modal */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2.5em; 
+    color: #8B0000;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+/* X button grows when you hover */
+.modal-close:hover {
+    transform: scale(1.2);
+}
+
+/* The large instrument image in the modal */
+.modal-image {
+    width: 300px;
+    height: 300px;
+    object-fit: contain; /* Show full image without cropping */
+    border-radius: 50%; /* Circular image */
+    margin-bottom: 20px;
+    border: 4px solid #8B0000;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Shadow around image */
+}
+
+/* Header row with instrument name and sound button */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; 
+}
+
+/* Instrument name in the modal */
+.modal-name {
+    font-size: 2em; 
+    color: #8B0000;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* The play/pause sound button */
+.modal-sound-btn {
+    background: #8B0000;
+    border: 3px solid #8B0000;
+    border-radius: 50%; 
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+/* Button gets darker and bigger on hover */
+.modal-sound-btn:hover {
+    background: #a00000; 
+    transform: scale(1.1); 
+}
+
+/* When paused, make the icon slightly transparent */
+.modal-sound-btn.paused .sound-icon {
+    opacity: 0.5;
+}
+
+/* The SVG icon inside the button */
+.sound-icon {
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+
+/* Simple fade in from bottom, used for error/loading messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+
+/* Modal pops in with a scale effect */
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1); 
+        opacity: 1;
+    }
+}
+
+/* Hourglass emoji rotating continuously while loading */
+@keyframes rotateHourglass {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(90deg); }
+    50% { transform: rotate(180deg); }
+    75% { transform: rotate(270deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Loading dots animation */
+@keyframes dotPulse {
+    0%, 80%, 100% {
+        opacity: 0.3; 
+        transform: scale(0.8); 
+    }
+    40% {
+        opacity: 1; 
+        transform: scale(1.2); 
+    }
+}
+
+/* The explosion animation, discs start at center and fly outward */
+@keyframes explode {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0); 
+    }
+    50% {
+        opacity: 1;
+        transform: translate(calc(-50% + var(--explode-x)), calc(-50% + var(--explode-y))) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(calc(-50% + var(--explode-x)), calc(-50% + var(--explode-y))) scale(1);
+    }
+}

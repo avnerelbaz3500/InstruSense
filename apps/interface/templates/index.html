@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstruSense - Reconnaissance d'instruments</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Zone for the discs that come out with each instrument -->
+    <div class="instruments-explosion" id="instrumentsExplosion"></div>
+    
+    <div class="container">
+        <!-- Header of the page -->
+        <header>
+            <h1>InstruSense</h1>
+            <p>Instrument recognition</p>
+        </header>
+
+        <main>
+            <!-- Form to upload an audio file -->
+            <div class="upload-section">
+                <h2>Choose an audio file</h2>
+                <form id="uploadForm">
+                    <input type="file" id="audioFile" accept="audio/*" required>
+                    <button type="submit" id="submitBtn">Analyze</button>
+                </form>
+            </div>
+
+            <div class="error-section" id="errorSection" style="display: none;">
+                <p class="error-message" id="errorMessage"></p>
+            </div>
+
+            <!-- Loading zone -->
+            <div class="loading-section" id="loadingSection" style="display: none;">
+                <p>
+                    <span class="loading-emoji">⏳</span>
+                    Analysis in progress<span class="loading-dots">
+                        <span class="dot">.</span>
+                        <span class="dot">.</span>
+                        <span class="dot">.</span>
+                    </span>
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal to display the instrument in large -->
+    <div class="instrument-modal" id="instrumentModal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-header">
+                <h2 class="modal-name" id="modalName"></h2>
+                <button class="modal-sound-btn" id="modalSoundBtn" title="Play/Pause sound">
+                    <span class="sound-icon"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Links to the JavaScript files -->
+    <script src="/static/js/instruments.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
+
