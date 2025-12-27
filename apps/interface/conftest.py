@@ -5,16 +5,15 @@ Sets up fixtures for Playwright browser testing
 
 import sys
 from pathlib import Path
-
-# Add the project root to Python path so we can import apps
-PROJECT_ROOT = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
-
 import pytest
 from apps.interface.server import app
 import uvicorn
 import threading
 import time
+
+# Add the project root to Python path so we can import apps
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 
 @pytest.fixture(scope="session")

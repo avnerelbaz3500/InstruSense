@@ -131,7 +131,8 @@ def test_submit_with_file_shows_loader(page, live_server):
 def test_modal_open_and_close(page, live_server):
     page.goto(f"{live_server}/")
 
-    page.evaluate("""
+    page.evaluate(
+        """
       const modal = document.getElementById('instrumentModal');
       const img = document.getElementById('modalImage');
       const name = document.getElementById('modalName');
@@ -141,7 +142,8 @@ def test_modal_open_and_close(page, live_server):
 
       modal.style.display = 'flex';
       modal.classList.add('show');
-    """)
+    """
+    )
 
     page.wait_for_selector("#instrumentModal", state="visible", timeout=2000)
     assert page.locator("#modalName").text_content() == "Piano"
