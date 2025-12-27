@@ -10,7 +10,7 @@ router = APIRouter()
 @router.post("/predict", response_model=PredictOut)
 async def predict(
     file: UploadFile = File(...),
-    service: PredictionService = Depends(get_prediction_service)
+    service: PredictionService = Depends(get_prediction_service),
 ) -> PredictOut:
     audio_bytes = await file.read()
     result = await service.predict(audio_bytes)
