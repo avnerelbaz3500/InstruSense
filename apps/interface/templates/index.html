@@ -8,48 +8,60 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+    <!-- Zone for the discs that come out with each instrument -->
+    <div class="instruments-explosion" id="instrumentsExplosion"></div>
+    
     <div class="container">
-        <!-- En-tête de la page -->
+        <!-- Header of the page -->
         <header>
-            <h1>🎵 InstruSense</h1>
-            <p>Reconnaissance d'instruments de musique</p>
+            <h1>InstruSense</h1>
+            <p>Instrument recognition</p>
         </header>
 
-        <!-- Zone principale -->
         <main>
-            <!-- Formulaire pour uploader un fichier audio -->
+            <!-- Form to upload an audio file -->
             <div class="upload-section">
-                <h2>Choisissez un fichier audio</h2>
+                <h2>Choose an audio file</h2>
                 <form id="uploadForm">
                     <input type="file" id="audioFile" accept="audio/*" required>
-                    <button type="submit" id="submitBtn">Analyser</button>
+                    <button type="submit" id="submitBtn">Analyze</button>
                 </form>
             </div>
 
-            <!-- Zone d'affichage du résultat -->
-            <div class="result-section" id="resultSection" style="display: none;">
-                <h2>Résultat de l'analyse</h2>
-                <div class="result-card">
-                    <p class="instrument-label">Instrument détecté :</p>
-                    <p class="instrument-name" id="instrumentName">-</p>
-                    <p class="confidence-label">Confiance :</p>
-                    <p class="confidence-value" id="confidenceValue">-</p>
-                </div>
-            </div>
-
-            <!-- Zone d'affichage des erreurs -->
             <div class="error-section" id="errorSection" style="display: none;">
                 <p class="error-message" id="errorMessage"></p>
             </div>
 
-            <!-- Zone de chargement -->
+            <!-- Loading zone -->
             <div class="loading-section" id="loadingSection" style="display: none;">
-                <p>⏳ Analyse en cours...</p>
+                <p>
+                    <span class="loading-emoji">⏳</span>
+                    Analysis in progress<span class="loading-dots">
+                        <span class="dot">.</span>
+                        <span class="dot">.</span>
+                        <span class="dot">.</span>
+                    </span>
+                </p>
             </div>
         </main>
     </div>
 
-    <!-- Lien vers le fichier JavaScript -->
+    <!-- Modal to display the instrument in large -->
+    <div class="instrument-modal" id="instrumentModal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-header">
+                <h2 class="modal-name" id="modalName"></h2>
+                <button class="modal-sound-btn" id="modalSoundBtn" title="Play/Pause sound">
+                    <span class="sound-icon"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Links to the JavaScript files -->
+    <script src="/static/js/instruments.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
 </html>
