@@ -40,7 +40,7 @@ class Overseer:
         self.model = Model(self.params["n_instr"]).to(self.device)
         self.optimiser = torch.optim.Adam(self.model.parameters(), lr=self.params["lr"])
         checkpoint = torch.load(
-            self.weight_path / "checkpoint.pth",
+            self.weight_path / "best.pth",
             map_location=self.device,
             weights_only=True,
         )
