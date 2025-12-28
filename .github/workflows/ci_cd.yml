@@ -14,21 +14,16 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install uv
-        run: |
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-
       - name: Install dependencies
         run: |
-          uv sync
+          pip install flake8 black pytest pydantic fastapi
 
       - name: Lint code
-        run: uv run flake8 . --max-line-length=120 --extend-ignore=E203,W391 --exclude=.venv,generator-archi.py
+        run: flake8 . --max-line-length=120 --extend-ignore=E203,W391 --exclude=.venv,generator-archi.py
 
       - name: Format code
-        run: uv run black --check .
+        run: black --check .
 
       - name: Run tests
         run: |
-          uv run pytest tests/unit/
+          pytest tests/unit/
