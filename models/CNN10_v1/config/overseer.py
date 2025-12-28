@@ -52,11 +52,14 @@ class Overseer:
         x = self.preprocessor(wav_path).unsqueeze(0).to(self.device)
         with torch.no_grad():
             y = self.model(x)
+            y = torch.sigmoid(y)
+        # print("Raw scores:", y)
+        # print("Max score:", y.max().item())
         y_thresh = (y > self.params["threshold"]).squeeze(0)
         l_instr = []
         for i in range(self.params["n_instr"]):
             if y_thresh[i]:
-                l_instr.append(self.instrument_dict[i])
+                l_instr.append(self.instrument_dict[str(i)])
         return l_instr
 
     def save_epoch(self, dico_epoch):

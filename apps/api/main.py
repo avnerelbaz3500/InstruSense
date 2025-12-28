@@ -13,7 +13,10 @@ app = FastAPI(
 # CORS - autoriser l'interface à appeler l'API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -24,11 +27,7 @@ app.include_router(prediction.router, prefix="/api", tags=["prediction"])
 
 @app.get("/")
 def root():
-    return {
-        "message": "InstruSense API",
-        "docs": "/docs",
-        "health": "/health"
-    }
+    return {"message": "InstruSense API", "docs": "/docs", "health": "/health"}
 
 
 @app.get("/health")

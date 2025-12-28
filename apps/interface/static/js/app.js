@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearDiscs();
 
     // Ensure we have an array of instruments
-    const instruments = Array.isArray(data) ? data : [];
+    const instruments = data.instruments || [];
 
     // Exit if no instruments detected
     if (instruments.length === 0) return;

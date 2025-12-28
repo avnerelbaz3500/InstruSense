@@ -21,13 +21,15 @@ services:
     volumes:
       - ../models:/models
 
-  training:
+  interface:
     build:
       context: ..
-      dockerfile: docker/training.Dockerfile
-    volumes:
-      - ../models:/models
-      - ../data:/data
+      dockerfile: docker/interface.Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
 
 volumes:
   models:
