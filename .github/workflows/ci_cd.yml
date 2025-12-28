@@ -16,7 +16,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install flake8 black pytest pydantic fastapi
+          pip install flake8 black pytest pydantic fastapi httpx
 
       - name: Lint code
         run: flake8 . --max-line-length=120 --extend-ignore=E203,W391 --exclude=.venv,generator-archi.py
