@@ -1,0 +1,21 @@
+# Environnements locaux
+.venv
+env
+
+# Tests
+tests/
+*.pytest_cache/
+
+# Fichiers temporaires et logs
+*.log
+*.tmp
+__pycache__/
+
+# Configuration locale
+.env
+.env.local
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
