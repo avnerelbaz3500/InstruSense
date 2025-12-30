@@ -1,6 +1,7 @@
 # Environnements locaux
 .venv
 env
+.env
 
 # Tests
 tests/
@@ -9,6 +10,9 @@ tests/
 # Fichiers temporaires et logs
 *.log
 *.tmp
+*.pyc
+*.pyo
+*.pyd
 __pycache__/
 
 # Configuration locale
@@ -19,3 +23,5 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+node_modules

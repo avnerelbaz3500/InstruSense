@@ -3,23 +3,28 @@ name = "instru-sense"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
-    "fastapi",
-    "uvicorn",
-    "httpx",
-    "pyyaml",
-    "numpy>=2.2.6",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "httpx>=0.25.0",
+    "pyyaml>=6.0",
     "python-multipart>=0.0.21",
-    "torchcodec>=0.9.1",
-    "soundfile>=0.13.1",
 ]
 
-[tool.uv]
-dev-dependencies = [
-    "pytest>=9.0.2",
-    "pytest-asyncio",
-    "torch",
-    "torchaudio",
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0", "pytest-asyncio>=0.21.0"]
+ml  = [
+    "numpy>=1.27.0",
+    "torch>=2.1.0",
+    "torchaudio>=2.1.0",
+    "soundfile>=0.12.1",
 ]
+other = ["torchcodec>=0.2.0",]
 
-[tool.pytest.ini_options]
-pythonpath = ["."]
+[tool.setuptools.packages.find] 
+where = ["."]
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+

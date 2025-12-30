@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10"
 resolution-markers = [
     "python_full_version >= '3.12'",
@@ -269,12 +269,9 @@ dependencies = [
     { name = "httpx" },
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "pytest" },
     { name = "python-multipart" },
     { name = "pyyaml" },
     { name = "soundfile" },
-    { name = "torch" },
-    { name = "torchaudio" },
     { name = "torchcodec" },
     { name = "uvicorn" },
 ]
@@ -283,6 +280,8 @@ dependencies = [
 dev = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
+    { name = "torch" },
+    { name = "torchaudio" },
 ]
 
 [package.metadata]
@@ -290,20 +289,19 @@ requires-dist = [
     { name = "fastapi" },
     { name = "httpx" },
     { name = "numpy", specifier = ">=2.2.6" },
-    { name = "pytest", specifier = ">=9.0.2" },
     { name = "python-multipart", specifier = ">=0.0.21" },
     { name = "pyyaml" },
     { name = "soundfile", specifier = ">=0.13.1" },
-    { name = "torch" },
-    { name = "torchaudio" },
     { name = "torchcodec", specifier = ">=0.9.1" },
     { name = "uvicorn" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "pytest" },
+    { name = "pytest", specifier = ">=9.0.2" },
     { name = "pytest-asyncio" },
+    { name = "torch" },
+    { name = "torchaudio" },
 ]
 
 [[package]]

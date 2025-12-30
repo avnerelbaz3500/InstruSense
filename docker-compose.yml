@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      INFERENCE_URL: "http://inference:8001/infer"
+    restart: unless-stopped
+
+  inference:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.inference
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
+
+  interface:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.interface
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+      - inference
+    restart: unless-stopped
