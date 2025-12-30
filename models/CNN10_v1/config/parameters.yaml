@@ -1,4 +1,4 @@
-lr: 5.0e-05
+lr: 2.0e-04
 model_name: test
-n_instr: 25
-threshold: 0.005
+n_instr: 8
+threshold: 0.2
