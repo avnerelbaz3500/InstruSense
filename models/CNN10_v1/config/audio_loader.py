@@ -1,22 +1,43 @@
-import soundfile as sf
 import torchaudio
 import torch
 
+def audio_to_input(
+    audio_path,
+    sample_rate=22050,
+    n_mels=128,
+    chunk_duration=3.0,
+):
+    waveform, sr = torchaudio.load(audio_path)
 
-def audio_to_input(audio_path, sample_rate=22050, n_mels=128):
-    # Charger avec soundfile (pas besoin de FFmpeg)
-    waveform, sr = sf.read(audio_path)
-    waveform = torch.tensor(waveform, dtype=torch.float32)
+    if waveform.shape[0] > 1:
+        waveform = waveform.mean(dim=0, keepdim=True)
 
-    # Si stéréo, convertir en mono
-    if waveform.ndim == 2:
-        waveform = waveform.mean(dim=1)
+    if sr != sample_rate:
+        waveform = torchaudio.functional.resample(waveform, sr, sample_rate)
 
-    # Ajouter dimension channel
-    waveform = waveform.unsqueeze(0)
+    chunk_size = int(sample_rate * chunk_duration)
+    total_samples = waveform.shape[1]
 
-    mel_transform = torchaudio.transforms.MelSpectrogram(sample_rate=sr, n_mels=n_mels)
-    mel = mel_transform(waveform)
-    mel = torchaudio.transforms.AmplitudeToDB()(mel)
-    mel = (mel - mel.mean()) / (mel.std() + 1e-6)
-    return mel
+    mel_transform = torchaudio.transforms.MelSpectrogram(
+        sample_rate=sample_rate,
+        n_mels=n_mels
+    )
+    db_transform = torchaudio.transforms.AmplitudeToDB()
+
+    chunks = []
+
+    for start in range(0, total_samples, chunk_size):
+        end = start + chunk_size
+        chunk = waveform[:, start:end]
+
+        if chunk.shape[1] < chunk_size:
+            pad = chunk_size - chunk.shape[1]
+            chunk = torch.nn.functional.pad(chunk, (0, pad))
+
+        mel = mel_transform(chunk)
+        mel = db_transform(mel)
+        mel = (mel - mel.mean()) / (mel.std() + 1e-6)
+
+        chunks.append(mel)
+
+    return chunks
