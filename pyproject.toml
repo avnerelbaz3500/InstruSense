@@ -16,7 +16,10 @@ ml  = [
     "numpy>=1.27.0",
     "torch>=2.1.0",
     "torchaudio>=2.1.0",
+    "torchcodec>=0.2.0",
     "soundfile>=0.12.1",
+    "loguru>=0.7.0",
+    "huggingface_hub>=0.17.0",
 ]
 other = ["torchcodec>=0.2.0",]
 

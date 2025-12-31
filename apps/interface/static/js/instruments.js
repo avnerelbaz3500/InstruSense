@@ -15,32 +15,11 @@ const INSTRUMENTS_CONFIG = {
         name: "Piano"
     },
     "violin": {
-        image: "images/Violin.jpg",
+        image: "images/violin.jpg",
         sound: "sounds/violin.aiff",
         animation: "slideInRight",
         color: "#8B0000",
         name: "Violin"
-    },
-    "viola": {
-        image: "images/Viola.jpg",
-        sound: "sounds/viola.wav",
-        animation: "fadeInUp",
-        color: "#8B0000",
-        name: "Viola"
-    },
-    "double bass": {
-        image: "images/double_bass.jpg",
-        sound: "sounds/double-bass.aiff",
-        animation: "slideInUp",
-        color: "#8B0000",
-        name: "Double Bass"
-    },
-    "clarinet": {
-        image: "images/clarinet.jpg",
-        sound: "sounds/clarinets.flac",
-        animation: "zoomIn",
-        color: "#8B0000",
-        name: "Clarinet"
     },
     "auxiliary percussion": {
         image: "images/percussion.jpg",
@@ -70,19 +49,19 @@ const INSTRUMENTS_CONFIG = {
         color: "#8B0000",
         name: "Drum Set"
     },
-    "tenor saxophone": {
+    "saxophone": {
         image: "images/tenor_saxophone.jpg",
         sound: "sounds/tenor-saxophone.wav",
         animation: "swing",
         color: "#8B0000",
-        name: "Tenor Saxophone"
+        name: "Saxophone"
     },
-    "vibraphone": {
-        image: "images/vibraphone.jpg",
-        sound: "sounds/vibraphone.wav",
+    "organ": {
+        image: "images/organ.png",
+        sound: "sounds/organ.wav",
         animation: "tada",
         color: "#8B0000",
-        name: "Vibraphone"
+        name: "Organ"
     },
     "trumpet": {
         image: "images/trompette.jpg",
@@ -91,48 +70,21 @@ const INSTRUMENTS_CONFIG = {
         color: "#8B0000",
         name: "Trumpet"
     },
-    "clean electric guitar": {
+    "electric guitar": {
         image: "images/electric_guitar.jpg",
         sound: "sounds/electric_clean_guitar.wav",
         animation: "slideInLeft",
         color: "#8B0000",
         name: "Electric Guitar"
     },
-    "trombone section": {
-        image: "images/trombone.jpg",
-        sound: "sounds/trombone.wav",
-        animation: "fadeInUp",
-        color: "#8B0000",
-        name: "Trombone Section"
-    },
-    "electric bass": {
-        image: "images/bass_guitar.jpg",
-        sound: "sounds/bass-guitar.wav",
-        animation: "slideInRight",
-        color: "#8B0000",
-        name: "Electric Bass"
-    },
-    "electric piano": {
-        image: "images/electric _piano.jpg",
-        sound: "sounds/electric-piano.wav",
-        animation: "bounceIn",
-        color: "#8B0000",
-        name: "Electric Piano"
-    },
-    "synthesizer": {
-        image: "images/synthetiseur.jpg",
-        sound: "sounds/synthesizer.aiff",
+
+    "accoustic guitar": {
+        image: "images/acoustic guitar.jpg",
+        sound: "sounds/acoustic guitar.wav",
         animation: "pulse",
         color: "#8B0000",
-        name: "Synthesizer"
+        name: "Acoustic Guitar"
     },
-    "harp": {
-        image: "images/harp.jpg",
-        sound: "sounds/harp.wav",
-        animation: "fadeIn",
-        color: "#8B0000",
-        name: "Harp"
-    }
 };
 
 // Function to get an instrument's configuration
