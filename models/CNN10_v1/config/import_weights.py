@@ -1,4 +1,4 @@
-#This file downloads the weights of our latest CNN model from hugging face, and put them in the folder weight
+# This file downloads the weights of our latest CNN model from hugging face, and put them in the folder weight
 
 from pathlib import Path
 import shutil

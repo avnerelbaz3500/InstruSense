@@ -26,12 +26,12 @@ app.include_router(prediction.router, prefix="/api", tags=["prediction"])
 
 
 @app.get("/")
-def root():
+def root() -> dict[str, str]:
     return {"message": "InstruSense API", "docs": "/docs", "health": "/health"}
 
 
 @app.get("/health")
-def health():
+def health() -> dict[str, str]:
     return {"status": "ok"}
 
 

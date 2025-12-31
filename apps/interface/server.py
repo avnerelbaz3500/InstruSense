@@ -22,7 +22,7 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 # Route principale - afficher la page d'accueil
 @app.get("/")
-async def read_root():
+async def read_root() -> FileResponse:
     """Affiche la page d'accueil"""
     index_path = TEMPLATES_DIR / "index.html"
     return FileResponse(str(index_path))
@@ -30,6 +30,6 @@ async def read_root():
 
 # Route de santé
 @app.get("/health")
-async def health():
+async def health() -> dict[str, str]:
     """Vérifie que le serveur fonctionne"""
     return {"status": "ok", "service": "interface"}

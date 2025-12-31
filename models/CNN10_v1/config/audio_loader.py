@@ -1,6 +1,7 @@
 import torchaudio
 import torch
 
+
 def audio_to_input(
     audio_path,
     sample_rate=22050,
@@ -19,8 +20,7 @@ def audio_to_input(
     total_samples = waveform.shape[1]
 
     mel_transform = torchaudio.transforms.MelSpectrogram(
-        sample_rate=sample_rate,
-        n_mels=n_mels
+        sample_rate=sample_rate, n_mels=n_mels
     )
     db_transform = torchaudio.transforms.AmplitudeToDB()
 

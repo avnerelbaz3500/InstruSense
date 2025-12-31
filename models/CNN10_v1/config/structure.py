@@ -1,4 +1,4 @@
-'''
+"""
 import torch.nn as nn
 import torch.nn.functional as F
 
@@ -42,7 +42,8 @@ class Model(nn.Module):
         x = self.fc(x)
 
         return x
-'''
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -51,6 +52,7 @@ import torch.nn.functional as F
 class Model(nn.Module):
     def __init__(self, n_classes, dropout_p=0.3):
         super().__init__()
+
         def conv_block(in_ch, out_ch):
             return nn.Sequential(
                 nn.Conv2d(in_ch, out_ch, kernel_size=3, padding=1),
@@ -59,13 +61,13 @@ class Model(nn.Module):
             )
 
         self.block1 = conv_block(1, 64)
-        self.pool1  = nn.MaxPool2d(2, 2)
+        self.pool1 = nn.MaxPool2d(2, 2)
 
         self.block2 = conv_block(64, 128)
-        self.pool2  = nn.MaxPool2d(2, 2)
+        self.pool2 = nn.MaxPool2d(2, 2)
 
         self.block3 = conv_block(128, 256)
-        self.pool3  = nn.MaxPool2d(2, 2)
+        self.pool3 = nn.MaxPool2d(2, 2)
 
         # Fully connected head
         self.fc1 = nn.Linear(256, 512)
